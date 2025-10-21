@@ -40,7 +40,9 @@ async function fileToGenerativePart(file: File): Promise<{ inlineData: { data: s
 export const generatePassportPhoto = async (imageFile: File, size: string): Promise<string> => {
   // Initialize the Google Gemini AI client.
   // The API key is expected to be available in the environment variables.
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({
+  apiKey: import.meta.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY,
+});
 
   // Convert the uploaded file into the format required by the Gemini API.
   const imagePart = await fileToGenerativePart(imageFile);
